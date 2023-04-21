@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mi chat</title>
+    <style>
+        *{font-family:helvetica;
+          margin:0px;
+          padding:0px;
+          }
+        body{background: rgb(250, 250, 250);}
+        .contenedor{max-width:800px;
+                    margin:auto;
+                    transition:2s;
+                    background:rgb(246, 246, 246);
+                    overflow:hidden;
+                    height:100vh;}
+        .cap{background:rgb(240, 240, 240);
+             font-size:14px;
+             padding:10px;
+             margin:5px 0px;;
+             border-radius:5px;
+             color:rgb(79, 79, 79);
+             display:inline-block;
+             transition:2s;
+        }
+        .mensajes{margin:58px 0px 40px 0px;
+                  padding:10px;}
+        .input{width:80%;
+              padding:10px;
+              border-radius:7px;
+              border:1.5px solid rgb(90, 90, 90);
+              margin-right:3px;
+              transition:2s;
+              font-size:17px;}
+        button{width:20%;
+               background:rgb(110, 180, 255);
+               color:rgb(252, 252, 252);
+               border:none;
+               border-radius:7px;
+               border:1.5px solid rgb(110, 180, 255);
+               font-size:20px;}
+        .envio{position:fixed;
+                bottom:0px;
+                left: 0px;
+                width:100%;
+                }
+        .n{display:flex;
+           justify-content:space-between;
+           max-width:800px;
+           margin:auto;
+           padding:4px 10px;
+           background:rgb(244, 244, 244);
+           box-sizing: border-box;
+           transition:2s;}
+        
+        .b{background:rgb(63, 63, 63);
+           transition:2s;}
+        .c{background:rgb(63, 63, 63);
+           transition:2s;}
+        .d{background:rgb(99, 99, 99);
+             color:rgb(232, 232, 232);
+             transition:2s;}
+        .e{background:rgb(63, 63, 63);
+            transition:2s;}
+        .f{background:rgb(100, 100, 100);
+              color:rgb(232, 232, 232);
+              transition:2s; }
+        .menu{display:flex;
+              justify-content:space-between;
+              align-items:center;
+              background:rgb(110, 180, 255);
+              padding:14px 20px;
+              position:fixed;
+              width:100%;
+              max-width:800px;
+              margin:auto;
+              box-sizing: border-box;
+              border-radius:0px 0px 10px 10px;}
+        .cont{width:60px;
+              height:30px;
+              background:white;
+              border-radius:40px;
+              position:relative;
+              box-shadow:2px 2px 7px rgb(27, 114, 213);}
+        .circle{width:30px;
+              height:30px;
+              background:rgb(248, 199, 24);
+              border-radius:50%;
+              position:absolute;
+              left:30px;
+              transition:1s;
+              box-shadow:0px 0px 2px 2px rgb(248, 199, 24);}
+        .uno{left:0px;
+              transition:1s;
+              background:rgb(61, 61, 61);
+              box-shadow:0px 0px 2px 2px rgb(61, 61, 61);}
+        .logo h1{color:rgb(251, 251, 251);
+                 font-family:Brush Script MT;}
+        
+              
+    </style>
+</head>
+<body class="body">
+    <div class="contenedor">
+        <div class="menu">
+            <div class="logo">
+                <h1>VID</h1>
+            </div>
+            <div class="modo">
+                <div class="cont">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+        <div class="mensajes"></div>
+        <div class="envio">
+            <div class="n">
+                <input class="input" type="text" placeholder="Mensaje" autofocus>
+                <button>enviar</button>
+            </div>
+        </div>
+    </div>
+<script>
+    let mensajes = document.querySelector(".mensajes")
+    let input = document.querySelector("input")
+    let boton = document.querySelector("button")
+
+    boton.addEventListener("click",function(){
+        if(input.value == ""){
+            
+        }
+        else{
+            let elemento = document.createElement("p")
+            var br = document.createElement('br');
+            elemento.classList.add("cap")
+            elemento.textContent = input.value
+            mensajes.appendChild(elemento)
+            mensajes.appendChild(br)
+            let men = JSON.parse(localStorage.getItem("men"))|| []
+            men.push(input.value)
+            localStorage.setItem("men", JSON.stringify(men))
+            input.value = ""
+            } 
+        })
+    var men = JSON.parse(localStorage.getItem('men')) || [];
+    men.forEach(function(e){
+        console.log(e)
+        var elemento = document.createElement('p');
+        var br = document.createElement('br');      
+        elemento.classList.add("cap")
+        elemento.textContent = e
+        mensajes.appendChild(elemento);
+        mensajes.appendChild(br);
+    })
+//localStorage.clear()
+
+let body = document.querySelector(".body")
+let contenedor = document.querySelector(".contenedor")
+let cap = document.querySelectorAll(".cap")
+let n = document.querySelector(".n")
+let f = document.querySelector(".input")
+let oscuro = document.querySelector(".circle")
+oscuro.addEventListener("click",function(){
+    oscuro.classList.toggle("uno")
+
+    body.classList.toggle("b")
+    contenedor.classList.toggle("c")
+    n.classList.toggle("e")
+    f.classList.toggle("f")
+    cap.forEach(function(s){
+        s.classList.toggle("d")})
+})
+
+
+</script>
+</body>
+</html>
